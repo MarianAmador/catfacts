@@ -1,13 +1,24 @@
 import { getCatFact } from './api.js';
 import { showLoading, showFact, showError } from './ui.js';
 
-document.getElementById('btnFact').addEventListener('click', async () => {
+const btn = document.getElementById('btnFact');
+
+btn.addEventListener('click', async () => {
+  btn.disabled = true;
   showLoading();
 
   try {
     const data = await getCatFact();
     showFact(data.fact);
+
   } catch (error) {
-    showError('No se pudo obtener el dato. Revisa tu conexión.');
+    if (error.message === 'Tiempo de espera agotado') {
+      showError('El gato tiró el router… intenta otra vez');
+    } else {
+      showError('No se pudo obtener el dato. Revisa tu conexión.');
+    }
+
+  } finally {
+    btn.disabled = false;
   }
 });
