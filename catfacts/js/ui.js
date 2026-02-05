@@ -4,8 +4,14 @@ export function showLoading() {
 }
 
 export function showFact(text) {
-  document.getElementById('status').textContent = '';
-  document.getElementById('fact').textContent = text;
+  const statusElement = document.getElementById('status');
+  const factElement = document.getElementById('fact');
+
+  statusElement.textContent = '';
+  factElement.textContent = '';
+
+  const safeText = document.createTextNode(text ?? '');
+  factElement.appendChild(safeText);
 }
 
 export function showError(message) {
