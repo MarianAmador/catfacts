@@ -17,3 +17,9 @@ export function showFact(text) {
 export function showError(message) {
   document.getElementById('status').textContent = message;
 }
+
+export function showImage(url) {
+  const img= document.getElementById('catImage');
+  img.src = url;
+  img.style.display = 'block';
+}
